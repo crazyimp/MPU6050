@@ -25,7 +25,7 @@
   We are also using the 400 kHz fast I2C mode by setting the TWI_FREQ  to 400000L /twi.h utility file.
 */
 
-#include "MPU6050lib.h"
+#include "MPU6050.h"
 #include <Wire.h>
 MPU6050lib mpu;
 
@@ -62,6 +62,12 @@ void setup() {
     // Set up the interrupt pin, its set as active high, push-pull
     pinMode(intPin, INPUT);
     digitalWrite(intPin, LOW);
+
+    Serial.println("MPU6050");
+    Serial.println("6-DOF 16-bit");
+    Serial.println("motion sensor");
+    Serial.println("60 ug LSB");
+
     pinMode(blinkPin, OUTPUT);
     digitalWrite(blinkPin, HIGH);
 
@@ -77,12 +83,24 @@ void setup() {
         Serial.println("MPU6050 is online...");
 
         mpu.MPU6050SelfTest(SelfTest); // Start by performing self test and reporting values
-        //    Serial.print("x-axis self test: acceleration trim within : "); Serial.print(SelfTest[0],1); Serial.println("% of factory value");
-        //    Serial.print("y-axis self test: acceleration trim within : "); Serial.print(SelfTest[1],1); Serial.println("% of factory value");
-        //    Serial.print("z-axis self test: acceleration trim within : "); Serial.print(SelfTest[2],1); Serial.println("% of factory value");
-        //    Serial.print("x-axis self test: gyration trim within : "); Serial.print(SelfTest[3],1); Serial.println("% of factory value");
-        //    Serial.print("y-axis self test: gyration trim within : "); Serial.print(SelfTest[4],1); Serial.println("% of factory value");
-        //    Serial.print("z-axis self test: gyration trim within : "); Serial.print(SelfTest[5],1); Serial.println("% of factory value");
+        Serial.print("x-axis self test: acceleration trim within : ");
+        Serial.print(SelfTest[0], 1);
+        Serial.println("% of factory value");
+        Serial.print("y-axis self test: acceleration trim within : ");
+        Serial.print(SelfTest[1], 1);
+        Serial.println("% of factory value");
+        Serial.print("z-axis self test: acceleration trim within : ");
+        Serial.print(SelfTest[2], 1);
+        Serial.println("% of factory value");
+        Serial.print("x-axis self test: gyration trim within : ");
+        Serial.print(SelfTest[3], 1);
+        Serial.println("% of factory value");
+        Serial.print("y-axis self test: gyration trim within : ");
+        Serial.print(SelfTest[4], 1);
+        Serial.println("% of factory value");
+        Serial.print("z-axis self test: gyration trim within : ");
+        Serial.print(SelfTest[5], 1);
+        Serial.println("% of factory value");
 
         if (SelfTest[0] < 1.0f && SelfTest[1] < 1.0f && SelfTest[2] < 1.0f && SelfTest[3] < 1.0f && SelfTest[4] < 1.0f && SelfTest[5] < 1.0f) {
             Serial.println("Pass Selftest!");
