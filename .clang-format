@@ -1,0 +1,10 @@
+﻿---
+BasedOnStyle: LLVM
+AlwaysBreakTemplateDeclarations: 'true'
+BreakStringLiterals: 'false'
+ColumnLimit: '0'
+IndentWidth: '4'
+TabWidth: '4'
+UseTab: Never
+
+...
